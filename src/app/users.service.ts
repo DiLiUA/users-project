@@ -33,10 +33,11 @@ export class UsersServise {
     const index: number = this.findOne(user.id);
     user.name = user.name + '123465';
     this.users.splice(index, 1, user);
-    return this.users
+    return this.users;
   }
 
   addUser(user:User): User[] {
-    return this.users.push(user);
+    this.users.push(user);
+    return this.users;
   }
 }
