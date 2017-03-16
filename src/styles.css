@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+app-root {
+  display: block;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+/*app-root, router-outlet {*/
+  /*display: block;*/
+/*}*/
+
+.app-users-list {
+  display: block;
+}
+
+.new_user {
+  margin-bottom: 30px;
+}

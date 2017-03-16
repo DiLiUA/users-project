@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Http }              from '@angular/http';
+import { Component, OnInit} from '@angular/core';
+import {UserModalComponent} from '../user-modal/user-modal.component'
 
 import { User } from '../user';
 import { UsersServise } from '../users.service';
+import {ViewChild} from "../../../node_modules/@angular/core/src/metadata/di";
 
 @Component({
   selector: 'app-users-list',
@@ -10,6 +11,8 @@ import { UsersServise } from '../users.service';
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent implements OnInit {
+  @ViewChild(UserModalComponent) modal:UserModalComponent;
+
   users: User[];
 
   constructor(private usersServise: UsersServise) { }
@@ -26,8 +29,7 @@ export class UsersListComponent implements OnInit {
     this.users = this.usersServise.deleteUser(user.id);
   }
 
- addUser(user) {
-    this.usersServise.addUser({id: 10, name: 'Krog', lastName: 'Konectus', birthday: '01.02.1955', email: 'kkron@gmail.com', phone: '+45896632145'})
- }
-
+  addUser() {
+    this.modal.showChildModal();
+  }
 }
