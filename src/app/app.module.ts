@@ -11,6 +11,11 @@ import { AppComponent }       from './app.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { UserModalComponent } from './user-modal/user-modal.component';
+import {StoreModule} from "../../node_modules/@ngrx/store/src/ng2";
+import {StoreDevtoolsModule} from "../../node_modules/@ngrx/store-devtools/src/instrument";
+import {users} from "./reducers/users.reducer";
+import {EffectsModule} from "../../node_modules/@ngrx/effects/src/effects.module";
+import {UsersEffects} from "./effects/users.effects";
 
 const routes: Routes = [
   {path: '', redirectTo: 'users', pathMatch: 'full'},
@@ -29,7 +34,12 @@ const routes: Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(routes),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    StoreModule.provideStore({users}),
+    StoreDevtoolsModule.instrumentStore({
+      maxAge: 5
+    }),
+    EffectsModule.run(UsersEffects),
   ],
   providers: [UsersServise],
   bootstrap: [AppComponent]

@@ -1,6 +1,5 @@
 <button type="button" class="btn btn-primary text-uppercase new_user" (click)="addUser()">add user</button>
 
-
 <table class="table table-striped table-bordered" width="100%">
   <thead>
     <tr>
@@ -12,15 +11,16 @@
     </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let user of users; let i = index">
+  <tr *ngFor="let user of (users | async)?.list; let i = index">
     <td>{{i + 1}}</td>
     <td>{{user.name}}</td>
     <td>{{user.email}}</td>
     <td>{{user.phone}}</td>
     <td>
       <div class="btn-group">
-        <button class="btn btn-primary" (click)="editUser(user)">git addt</button>
-        <button class="btn btn-danger" (click)="deleteUser(user)">Del</button>
+        <button class="btn btn-primary" (click)="editUser(user)">{{'edit' | uppercase}}</button>
+        <button class="btn btn-danger" (click)="deleteUser(user)">{{'Del' | uppercase}}</button>
+        <!--<button class="btn btn-danger" (click)="addUser()">{{'Del' | uppercase}}</button>-->
       </div>
     </td>
   </tr>

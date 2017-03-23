@@ -1,35 +1,43 @@
 import { Component, OnInit} from '@angular/core';
 import {UserModalComponent} from '../user-modal/user-modal.component'
+import { Store } from '@ngrx/store';
 
 import { User } from '../user';
 import { UsersServise } from '../users.service';
 import {ViewChild} from "../../../node_modules/@angular/core/src/metadata/di";
+import {getUsers, addUser, deleteUser, editUser} from "../actions/users.actions";
+import {ChangeDetectionStrategy} from "../../../node_modules/@angular/core/src/change_detection/constants";
+import {AsyncPipe} from "../../../node_modules/@angular/common/src/pipes/async_pipe";
 
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.css']
+  styleUrls: ['./users-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersListComponent implements OnInit {
   @ViewChild(UserModalComponent) modal:UserModalComponent;
 
-  users: User[];
+  users: any;
 
-  constructor(private usersServise: UsersServise) { }
+  constructor(private store: Store<any>) {
+    this.store.dispatch(getUsers());
+    this.users = this.store.select('users');
+  }
 
   ngOnInit() {
-    this.users = this.usersServise.getUsers();
+
   }
 
   editUser(user) {
-    this.users = this.usersServise.editUser(user);
+    this.store.dispatch(editUser(user));
   }
 
   deleteUser(user) {
-    this.users = this.usersServise.deleteUser(user.id);
+    this.store.dispatch(deleteUser(user.id));
   }
 
   addUser() {
-    this.modal.showChildModal();
+    this.store.dispatch(addUser({name: 'Kris', lastName: 'Kargus', birthday: '01.02.1967', email: 'kargus.kris67@gmail.com', phone: '+45896632145'}));
   }
 }
