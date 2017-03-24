@@ -20,8 +20,9 @@
         <form novalidate (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
           <div class="form-group" [class.has-error]="!name.valid && name.touched">
             <label class="control-label" for="name">Name</label>
-            <input name="name" type="text" class="form-control" id="name" placeholder="Name" required pattern="[0-9]" [(ngModel)]="userData.user.name" #name="ngModel">
-            <div class="help-block"></div>
+            <input name="name" type="text" class="form-control" id="name" placeholder="Name" required pattern="[a-zA-Z]{2,15}" [(ngModel)]="userData.user.name" #name="ngModel">
+            <!--<div class="help-block" *ngIf="name.errors.required">sdfsdfsdf</div>-->
+            <!--<div class="help-block" *ngIf="name.errors.pattern">123</div>-->
           </div>
           <div class="form-group">
             <label class="control-label" for="lastName">Last name</label>

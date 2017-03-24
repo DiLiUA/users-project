@@ -17,13 +17,13 @@ import {NgModel} from "../../../node_modules/@angular/forms/src/directives/ng_mo
 export class UserModalComponent implements OnInit {
   @ViewChild('childModal') public childModal:ModalDirective;
   @ViewChild('userForm') public userForm: NgForm;
-  @ViewChild('name') public name: NgModel;
+  // @ViewChild('name') public name: NgModel;
   @Input() userData;
 
   public showChildModal(): void {
     this.userForm.form.reset();
     this.childModal.show();
-    console.log(this.name);
+    // console.log(this.name);
   }
 
   public hideChildModal(): void {
@@ -43,7 +43,6 @@ export class UserModalComponent implements OnInit {
 
       if (userForm.dirty) {
         this.userData.isAdd ? this.store.dispatch(addUser(user)) : this.store.dispatch(editUser(user));
-
       }
 
       this.hideChildModal();
