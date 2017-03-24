@@ -6,6 +6,7 @@
   role="dialog"
   aria-labelledby="myLargeModalLabel"
   aria-hidden="true"
+  (onHide)="userForm.reset()"
 >
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -16,7 +17,35 @@
         </button>
       </div>
       <div class="modal-body">
-        <app-user-form></app-user-form>
+        <form novalidate (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
+          <div class="form-group" [class.has-error]="!name.valid && name.touched">
+            <label class="control-label" for="name">Name</label>
+            <input name="name" type="text" class="form-control" id="name" placeholder="Name" required pattern="[0-9]" [(ngModel)]="userData.user.name" #name="ngModel">
+            <div class="help-block"></div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="lastName">Last name</label>
+            <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Last name" [(ngModel)]="userData.user.lastName" #lastName="ngModel">
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="birthday">Birthday</label>
+            <input name="birthday" type="text" class="form-control" id="birthday" placeholder="Your birthday" [(ngModel)]="userData.user.birthday" #birthday="ngModel">
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="email">E-mail</label>
+            <input name="email" type="text" class="form-control" id="email" placeholder="Your E-mail" required [(ngModel)]="userData.user.email" #email="ngModel">
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="phone">Your phone number</label>
+            <input name="phone" type="text" class="form-control" id="phone" placeholder="Your phone number" required [(ngModel)]="userData.user.phone" #phone="ngModel">
+          </div>
+
+          <button type="submit" class="btn btn-default" [disabled]="!userForm.valid">Submit</button>
+        </form>
+
       </div>
     </div>
   </div>

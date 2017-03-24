@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary text-uppercase new_user" (click)="addUser()">add user</button>
+<button type="button" class="btn btn-primary text-uppercase new_user" (click)="showModal({}, true)">add user</button>
 
 <table class="table table-striped table-bordered" width="100%">
   <thead>
@@ -18,14 +18,13 @@
     <td>{{user.phone}}</td>
     <td>
       <div class="btn-group">
-        <button class="btn btn-primary" (click)="editUser(user)">{{'edit' | uppercase}}</button>
+        <button class="btn btn-primary" (click)="showModal(user, false)">{{'edit' | uppercase}}</button>
         <button class="btn btn-danger" (click)="deleteUser(user)">{{'Del' | uppercase}}</button>
-        <!--<button class="btn btn-danger" (click)="addUser()">{{'Del' | uppercase}}</button>-->
       </div>
     </td>
   </tr>
   </tbody>
 </table>
 
-<app-user-modal></app-user-modal>
+<app-user-modal [userData]="userData"></app-user-modal>
 

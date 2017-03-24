@@ -1,19 +1,28 @@
-<form>
+<form novalidate (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
   <div class="form-group">
     <label for="name">Name</label>
-    <input name="name" type="text" class="form-control" id="name" placeholder="Name">
+    <input name="name" type="text" class="form-control" id="name" placeholder="Name" [(ngModel)]="user.name" #name="ngModel">
   </div>
   <div class="form-group">
-    <label for="birthday">Your birthday</label>
-    <input type="text" class="form-control" id="birthday" placeholder="Your birthday">
+    <label for="lastName">Last name</label>
+    <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Last name" required [(ngModel)]="user.lastName" #lastName="ngModel">
   </div>
+
+  <div class="form-group">
+    <label for="birthday">Birthday</label>
+    <input name="birthday" type="text" class="form-control" id="birthday" placeholder="Your birthday" [(ngModel)]="user.birthday" #birthday="ngModel">
+  </div>
+
   <div class="form-group">
     <label for="email">E-mail</label>
-    <input type="text" class="form-control" id="email" placeholder="E-mail">
+    <input name="email" type="text" class="form-control" id="email" placeholder="Your E-mail" [(ngModel)]="user.email" #email="ngModel">
   </div>
+
+
+
   <div class="form-group">
     <label for="phone">Your phone number</label>
-    <input name="phone" type="text" class="form-control" id="phone" placeholder="Your phone number">
+    <input name="phone" type="text" class="form-control" id="phone" placeholder="Your phone number" [(ngModel)]="user.phone" #phone="ngModel">
   </div>
 
   <button type="submit" class="btn btn-default">Submit</button>

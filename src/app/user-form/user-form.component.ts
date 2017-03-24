@@ -1,18 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {UsersServise} from "../users.service";
+import {Store} from "../../../node_modules/@ngrx/store/src/store";
+import {editUser} from "../actions/users.actions";
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent {
+  @Input() user;
 
-  constructor() { }
+  constructor(private usersServise: UsersServise, private store: Store<any>,) { }
 
-  ngOnInit() {
-  }
-
-  test() {
-    alert(123);
+  onSubmit(userForm) {
+    if (userForm.valid) {
+      const user = Object.assign({}, this.user, userForm.value);
+      this.store.dispatch(editUser(user));
+      userForm.reset();
+    }
   }
 }

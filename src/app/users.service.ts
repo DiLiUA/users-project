@@ -1,13 +1,16 @@
 import {Observable} from "../../node_modules/rxjs/Observable";
 import {Injectable} from "../../node_modules/@angular/core/src/di/metadata";
+import {EventEmitter} from '@angular/core';
 
 @Injectable()
 export class UsersServise {
 
+  public addOrEditUser = new EventEmitter();
+
   getUsers() {
     const users = [
-      {id: 1, name: 'Jane', lastName: 'Air', birthday: '01.02.2001', email: 'jane.air@air.com', phone: '+380558874563'},
-      {id: 2, name: 'Vasya', lastName: 'Pupkin', birthday: '01.02.1992', email: 'vasul.pupkin@gmail.com', phone: '+79151478852'},
+      {id: 1, name: '', lastName: 'Air', birthday: '01.02.2001', email: 'jane.air@air.com', phone: '+380558874563'},
+      {id: 2, name: '1', lastName: 'Pupkin', birthday: '01.02.1992', email: 'vasul.pupkin@gmail.com', phone: '+79151478852'},
     ];
     return Observable.timer(1000).mapTo(users);
   }
@@ -17,9 +20,7 @@ export class UsersServise {
   }
 
   editUser(user) {
-    let copy = Object.assign({}, user);
-    copy.name = "DIMAS";
-    return Observable.timer(1000).mapTo(copy);
+    return Observable.timer(1000).mapTo(user);
   }
 
   addUser(user){
